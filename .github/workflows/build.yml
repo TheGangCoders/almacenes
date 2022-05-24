@@ -42,6 +42,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
+          dotnet tool install --global dotnet-sonarscanner
           SonarScanner.MSBuild.exe begin /k:"TheGangCoders_almacenes" /o:"thegangcoders" /d:sonar.login="{{ secrets.SONAR_TOKEN }}"
           MSBuild.exe ETProduccionMS.sln /t:Rebuild
           SonarScanner.MSBuild.exe end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
