@@ -42,6 +42,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"TheGangCoders_almacenes" /o:"thegangcoders" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet msbuild ETProduccionMS.sln -t:restore -p:RestorePackagesConfig=true
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          SonarScanner.MSBuild.exe begin /k:"TheGangCoders_almacenes" /o:"thegangcoders" /d:sonar.login="{{ secrets.SONAR_TOKEN }}"
+          MSBuild.exe ETProduccionMS.sln /t:Rebuild
+          SonarScanner.MSBuild.exe end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
